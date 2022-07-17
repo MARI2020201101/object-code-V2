@@ -2,7 +2,7 @@ package commandtodo;
 
 interface Visitor {
     void drawTask(CompositeTask task, int depth);
-    void end(int depth);
+    void end(int depth, boolean isEnd);
 }
 
 class ConsoleVisitor implements Visitor{
@@ -18,33 +18,29 @@ class ConsoleVisitor implements Visitor{
     }
 
     @Override
-    public void end(int depth) {}
+    public void end(int depth, boolean isEnd) {}
 }
 
 class JsonVisitor implements Visitor{
+    private String result = "";
 
     @Override
     public void drawTask(CompositeTask task, int depth) {
-        String padding = getPadding(depth);
-        System.out.println(padding+"{");
-        System.out.println(padding+"    title: \"" + task.getTitle() + "\" ,");
-        System.out.println(padding+"    date: \"" + task.getDate() + "\" ,");
-        System.out.println(padding+"    isComplete: \"" + task.getComplete() + ",");
-        System.out.println(padding+"    sub: [");
+        result+="{";
+        result+="    title: \"" + task.getTitle() + "\",\n";
+        result+="    date: \"" + task.getDate() + "\",\n";
+        result+="    isComplete: \"" + task.getComplete() + ",\n";
+        result+="    sub: [\n";
     }
 
-    private String getPadding(int depth){
-        String padding = "";
-        for(int i = 0; i < depth ; i++){
-            padding+= "  ";
-        }
-        return padding;
-    }
     @Override
-    public void end(int depth) {
-        String padding = getPadding(depth);
-        System.out.println(padding+"  ]");
-        System.out.println(padding+"},");
+    public void end(int depth, boolean isEnd) {
+        result+="  ]\n";
+        result+="}\n";
+        if(!isEnd) result+=",";
+    }
 
+    public String getResult() {
+        return result;
     }
 }

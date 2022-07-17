@@ -2,14 +2,27 @@ package commandtodo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 class CommandTask {
     private final CompositeTask task;
     private List<Command> commands = new ArrayList<>();
     private int cursor = 0;
+    private final Map<String, String> saved = new HashMap<>();
 
+    public void save(String key){
+        JsonVisitor jsonVisitor = new JsonVisitor();
+        Renderer renderer = new Renderer(()->jsonVisitor);
+        renderer.render(task.getReport(CompositeSortType.TITLE_ASC));
+        saved.put(key, jsonVisitor.getResult());
+    }
+    public void load(String key){
+        String savedJson = saved.get(key);
+        System.out.println(savedJson);
+    }
     public void undo(){
         if(cursor < 0) return;
         commands.get(cursor--).undo(task);

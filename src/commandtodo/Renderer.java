@@ -1,6 +1,7 @@
 package commandtodo;
 
 
+import java.util.List;
 import java.util.function.Supplier;
 
 class Renderer {
@@ -10,13 +11,15 @@ class Renderer {
         this.factory = factory;
     }
     public void render(TaskReport report){
-        render(factory.get(),report, 0);
+        render(factory.get(), report, 0 ,true);
     }
-    public void render(Visitor visitor, TaskReport report, int depth){
+    public void render(Visitor visitor, TaskReport report, int depth, boolean isEnd){
         visitor.drawTask(report.getTask(), depth);
-        for(TaskReport r : report.getList()){
-            render(visitor, r, depth+1);
+        List<TaskReport> subList = report.getList();
+        int i = subList.size();
+        for(TaskReport r : subList){
+            render(visitor, r, depth+1, (--i == 0));
         }
-        visitor.end(depth);
+        visitor.end(depth, isEnd);
     }
 }
