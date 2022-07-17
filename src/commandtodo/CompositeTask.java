@@ -1,13 +1,10 @@
-package todo;
+package commandtodo;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 class CompositeTask {
-    // Task, Tasks 무시
-    // 얘가 둘다 역할한다. 리프이자 노드역할.
-
     private String title;
     private LocalDateTime date;
     private Boolean isComplete=false;
@@ -32,7 +29,6 @@ class CompositeTask {
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
-
     public Boolean getComplete() {
         return isComplete;
     }
@@ -40,13 +36,17 @@ class CompositeTask {
     public void removeTask(CompositeTask task){
         list.remove(task);
     }
-    public void addTask(String title, LocalDateTime date){
-        list.add(new CompositeTask(title,date));
+
+    public CompositeTask addTask(String title, LocalDateTime date){
+        CompositeTask task = new CompositeTask(title, date);
+        list.add(task);
+        return task;
     }
+
     public TaskReport getReport(CompositeSortType type){
         TaskReport report = new TaskReport(this);
         for(CompositeTask t : list){
-            report.add(t.getReport(type));//서브리스트들이 재귀적으로 호출된다.
+            report.add(t.getReport(type));
         }
         return report;
     }

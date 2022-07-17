@@ -1,5 +1,5 @@
 package todo;
-public enum SortType{
+enum SortType{
     TITLE_DESC{
         @Override
         public int compare(Task a, Task b) {

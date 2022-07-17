@@ -2,7 +2,7 @@ package todo;
 
 import java.time.LocalDateTime;
 
-public class Task {
+class Task {
     private String title;
     private LocalDateTime date;
     private Boolean isComplete=false;

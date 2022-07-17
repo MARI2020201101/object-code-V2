@@ -1,4 +1,4 @@
-package todo;
+package commandtodo;
 
 enum CompositeSortType {
     TITLE_DESC{

@@ -1,9 +1,10 @@
-package todo;
+package commandtodo;
 
 interface Visitor {
     void drawTask(CompositeTask task, int depth);
     void end(int depth);
 }
+
 class ConsoleVisitor implements Visitor{
 
     @Override
@@ -19,6 +20,7 @@ class ConsoleVisitor implements Visitor{
     @Override
     public void end(int depth) {}
 }
+
 class JsonVisitor implements Visitor{
 
     @Override

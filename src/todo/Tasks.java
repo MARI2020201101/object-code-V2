@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Tasks {
+class Tasks {
     private String title;
     private final Set<Task> list = new HashSet<>();
 
