@@ -1,0 +1,4 @@
+package theater;
+
+class Movie {
+}
