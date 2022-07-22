@@ -1,4 +1,4 @@
-package theaterwithreserve.reverse;
+package theaterstrategy;
 
 class Customer {
     private final Money amount;

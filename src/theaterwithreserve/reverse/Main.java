@@ -32,7 +32,8 @@ class Main {
         Set<Screening> screening = theater.getScreening(movie);
         Screening screening1 = screening.stream().findFirst().get();
         Reservation reservation = customer.reserve(seller, theater, movie, screening1, 2);
-
+        boolean isOk = theater.enter(customer, 2);
         System.out.println("reserved info => "+ reservation);
+        System.out.println("isOk => " + isOk);
     }
 }
