@@ -1,0 +1,4 @@
+package developgenericocp;
+
+class Program {
+}

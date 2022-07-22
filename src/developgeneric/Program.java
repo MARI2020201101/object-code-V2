@@ -1,0 +1,4 @@
+package developgeneric;
+
+class Program {
+}

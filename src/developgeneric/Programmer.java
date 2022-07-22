@@ -1,4 +1,4 @@
-package develop;
+package developgeneric;
 
 interface Programmer {
     Program makeProgram(Paper paper);
@@ -9,12 +9,16 @@ class FrontEnd implements Programmer{
     private Language language ;
     @Override
     public Program makeProgram(Paper paper) {
-        if(paper instanceof Client){
-            Client pb= (Client) paper;
-            this.language = pb.language;
-            this.library = pb.library;
-        }//context error!! exception 조차 발생하지 않음.
+        paper.setData(this);
         return makeFrontEndProgram();
+    }
+
+    public void setLibrary(Library library) {
+        this.library = library;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
     private Program makeFrontEndProgram() {
@@ -27,13 +31,18 @@ class BackEnd implements Programmer{
     private Language language ;
     @Override
     public Program makeProgram(Paper paper) {
-        if(paper instanceof ServerClient){
-            ServerClient sp = (ServerClient) paper;
-            this.language = sp.backendLanguage;
-            this.server = sp.server;
-        }
+        paper.setData(this);
         return makeBackEndProgram();
     }
+
+    public void setServer(Server server) {
+        this.server = server;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
     private Program makeBackEndProgram() {
         return new Program();
     }
