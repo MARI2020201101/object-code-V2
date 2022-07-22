@@ -1,0 +1,4 @@
+package develop;
+
+class Program {
+}
